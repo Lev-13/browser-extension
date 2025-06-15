@@ -1,0 +1,69 @@
+{
+  "name": "Video Speed Controller",
+  "short_name": "videospeed",
+  "version": "0.8.0",
+  "manifest_version": 3,
+  "minimum_chrome_version": "89",
+  "description": "Speed up, slow down, advance and rewind HTML5 audio/video with shortcuts",
+  "homepage_url": "https://github.com/igrigorik/videospeed",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "activeTab"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "action": {
+    "default_icon": {
+      "19": "icons/icon19.png",
+      "38": "icons/icon38.png",
+      "48": "icons/icon48.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*/*",
+        "<all_urls>",
+        "file:///*"
+      ],
+      "match_about_blank": true,
+      "exclude_matches": [
+        "https://hangouts.google.com/*",
+        "https://meet.google.com/*"
+      ],
+      "css": [
+        "inject.css"
+      ],
+      "js": [
+        "inject.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "inject.css",
+        "shadow.css",
+        "scriptforsite/*.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ]
+    }
+  ]
+}
